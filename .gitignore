@@ -1,0 +1,31 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+*.zip
+
+# Material de origem do design (PSDs, wireframes) — pesado demais pro Git
+# (tem PSD acima do limite de 100MB do GitHub) e já está incorporado nas
+# imagens otimizadas em public/images/. Fica só localmente.
+recursos/
+WIREFRAME COMPLETO/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

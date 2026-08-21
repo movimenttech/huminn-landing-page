@@ -1,0 +1,31 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-space: 'Space Grotesk', sans-serif;
+  --font-roboto-condensed: 'Roboto Condensed', sans-serif;
+
+  --color-huminn-purple: #6e28e0;
+  --color-huminn-black: #000000;
+  --color-huminn-white: #ffffff;
+  --color-huminn-gray: #e9e8eb;
+  --color-huminn-gray-text: #94939a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-space);
+  background: var(--color-huminn-black);
+  color: var(--color-huminn-white);
+}
