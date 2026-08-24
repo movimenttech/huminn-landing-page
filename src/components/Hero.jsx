@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { projects } from '../data/projects'
+import { heroSequence } from '../data/heroSequence'
 
 const SLIDE_DURATION = 4500
 
@@ -9,7 +9,7 @@ export default function Hero() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % projects.length)
+      setIndex((i) => (i + 1) % heroSequence.length)
     }, SLIDE_DURATION)
     return () => clearInterval(timer)
   }, [])
@@ -18,7 +18,7 @@ export default function Hero() {
     <section id="top" className="relative h-[70vh] md:h-screen w-full overflow-hidden bg-black">
       <AnimatePresence>
         <motion.div
-          key={projects[index].id}
+          key={`${heroSequence[index]}-${index}`}
           className="absolute inset-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -26,9 +26,9 @@ export default function Hero() {
           transition={{ duration: 1, ease: 'easeInOut' }}
         >
           <motion.img
-            src={projects[index].heroImage}
+            src={heroSequence[index]}
             alt=""
-            className={`h-full w-full ${projects[index].heroImageClassName || 'object-cover'}`}
+            className="h-full w-full object-cover"
             initial={{ scale: 1 }}
             animate={{ scale: 1.08 }}
             transition={{ duration: SLIDE_DURATION / 1000 + 1, ease: 'linear' }}

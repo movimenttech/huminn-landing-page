@@ -1,7 +1,12 @@
 export const projects = [
   {
     id: 'casa-nonna',
-    heroImage: '/images/hero/casa-nonna.webp',
+    gallery: [
+      '/images/portfolio-gallery/casa-nonna-01.webp',
+      '/images/portfolio-gallery/casa-nonna-02.webp',
+      '/images/portfolio-gallery/casa-nonna-03.webp',
+      '/images/portfolio-gallery/casa-nonna-04.webp',
+    ],
     cardImage: '/images/portfolio/casa-nonna-card.webp',
     cardImageHover: '/images/portfolio/casa-nonna-card-hover.webp',
     name: 'Panettones Casa Nonna',
@@ -14,11 +19,14 @@ export const projects = [
   },
   {
     id: 'maria-maciel',
-    heroImage: '/images/hero/maria-maciel.webp',
-    // composição espalhada horizontalmente (cérebro + MM + balão de fala):
-    // um corte central (object-cover) sempre perde alguma ponta no celular,
-    // então mostramos a arte inteira em telas estreitas em vez de cortar.
-    heroImageClassName: 'object-contain md:object-cover',
+    gallery: [
+      '/images/portfolio-gallery/maria-maciel-01.webp',
+      '/images/portfolio-gallery/maria-maciel-02.webp',
+      '/images/portfolio-gallery/maria-maciel-03.webp',
+      '/images/portfolio-gallery/maria-maciel-04.webp',
+      '/images/portfolio-gallery/maria-maciel-05.webp',
+      '/images/portfolio-gallery/maria-maciel-06.webp',
+    ],
     cardImage: '/images/portfolio/maria-maciel-card.webp',
     cardImageHover: '/images/portfolio/maria-maciel-card-hover.webp',
     name: 'Identidade Visual Maria Maciel',
@@ -32,7 +40,15 @@ export const projects = [
   },
   {
     id: 'moiras',
-    heroImage: '/images/hero/moiras.webp',
+    gallery: [
+      '/images/portfolio-gallery/moiras-01.webp',
+      '/images/portfolio-gallery/moiras-02.webp',
+      '/images/portfolio-gallery/moiras-03.webp',
+      '/images/portfolio-gallery/moiras-04.webp',
+      '/images/portfolio-gallery/moiras-05.webp',
+      '/images/portfolio-gallery/moiras-06.webp',
+      '/images/portfolio-gallery/moiras-07.webp',
+    ],
     cardImage: '/images/portfolio/moiras-card.webp',
     cardImageHover: '/images/portfolio/moiras-card-hover.webp',
     name: 'Identidade Visual Moiras',
@@ -46,7 +62,12 @@ export const projects = [
   },
   {
     id: 'nutty',
-    heroImage: '/images/hero/nutty.webp',
+    gallery: [
+      '/images/portfolio-gallery/nutty-01.webp',
+      '/images/portfolio-gallery/nutty-02.webp',
+      '/images/portfolio-gallery/nutty-03.webp',
+      '/images/portfolio-gallery/nutty-04.webp',
+    ],
     cardImage: '/images/portfolio/nutty-card.webp',
     cardImageHover: '/images/portfolio/nutty-card-hover.webp',
     name: 'Barras de Cereais Nutty',
@@ -62,7 +83,14 @@ export const projects = [
   },
   {
     id: 'voe',
-    heroImage: '/images/hero/voe.webp',
+    gallery: [
+      '/images/portfolio-gallery/voe-01.webp',
+      '/images/portfolio-gallery/voe-02.webp',
+      '/images/portfolio-gallery/voe-03.webp',
+      '/images/portfolio-gallery/voe-04.webp',
+      '/images/portfolio-gallery/voe-05.webp',
+      '/images/portfolio-gallery/voe-06.webp',
+    ],
     cardImage: '/images/portfolio/voe-card.webp',
     cardImageHover: '/images/portfolio/voe-card-hover.webp',
     name: 'Identidade Visual V.O.E.',

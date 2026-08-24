@@ -1,6 +1,16 @@
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function PortfolioModal({ project, onClose, onPrev, onNext }) {
+export default function PortfolioModal({ project, onClose }) {
+  const [galleryIndex, setGalleryIndex] = useState(0)
+
+  useEffect(() => {
+    setGalleryIndex(0)
+  }, [project?.id])
+
+  const galleryLength = project?.gallery.length ?? 0
+  const goTo = (delta) => setGalleryIndex((i) => (i + delta + galleryLength) % galleryLength)
+
   return (
     <AnimatePresence>
       {project && (
@@ -21,44 +31,48 @@ export default function PortfolioModal({ project, onClose, onPrev, onNext }) {
           >
             <div className="relative">
               <img
-                src={project.heroImage}
+                src={project.gallery[galleryIndex]}
                 alt={project.name}
                 className="w-full aspect-[2/1] object-cover"
               />
 
-              <button
-                type="button"
-                aria-label="Projeto anterior"
-                onClick={onPrev}
-                className="group absolute inset-y-0 left-0 w-[clamp(56px,6.3vw,121px)] flex items-center justify-start pl-4 bg-gradient-to-r from-black/40 to-transparent"
-              >
-                <svg viewBox="0 0 56 35" className="h-5 w-8 rotate-90" fill="none">
-                  <path
-                    d="M28,34.82,0,0,28,34.82,56,0"
-                    stroke="#fff"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="6"
-                  />
-                </svg>
-              </button>
+              {galleryLength > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Imagem anterior"
+                    onClick={() => goTo(-1)}
+                    className="group absolute inset-y-0 left-0 w-[clamp(56px,6.3vw,121px)] flex items-center justify-start pl-4 bg-gradient-to-r from-black/40 to-transparent"
+                  >
+                    <svg viewBox="0 0 56 35" className="h-5 w-8 rotate-90" fill="none">
+                      <path
+                        d="M28,34.82,0,0,28,34.82,56,0"
+                        stroke="#fff"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="6"
+                      />
+                    </svg>
+                  </button>
 
-              <button
-                type="button"
-                aria-label="Próximo projeto"
-                onClick={onNext}
-                className="group absolute inset-y-0 right-0 w-[clamp(56px,6.3vw,121px)] flex items-center justify-end pr-4 bg-gradient-to-l from-black/40 to-transparent"
-              >
-                <svg viewBox="0 0 56 35" className="h-5 w-8 -rotate-90" fill="none">
-                  <path
-                    d="M28,34.82,0,0,28,34.82,56,0"
-                    stroke="#fff"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="6"
-                  />
-                </svg>
-              </button>
+                  <button
+                    type="button"
+                    aria-label="Próxima imagem"
+                    onClick={() => goTo(1)}
+                    className="group absolute inset-y-0 right-0 w-[clamp(56px,6.3vw,121px)] flex items-center justify-end pr-4 bg-gradient-to-l from-black/40 to-transparent"
+                  >
+                    <svg viewBox="0 0 56 35" className="h-5 w-8 -rotate-90" fill="none">
+                      <path
+                        d="M28,34.82,0,0,28,34.82,56,0"
+                        stroke="#fff"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="6"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
             </div>
 
             <div className="font-space text-huminn-gray-text text-sm md:text-lg leading-relaxed p-6 md:px-[clamp(24px,6.3vw,121px)] md:py-[clamp(24px,3.13vw,60px)] space-y-4">

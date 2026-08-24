@@ -18,41 +18,17 @@ function getCenteredIndex(container, cards) {
   return closest
 }
 
-function Arrow({ direction, onClick }) {
-  const isLeft = direction === 'left'
-  return (
-    <button
-      type="button"
-      aria-label={isLeft ? 'Projeto anterior' : 'Próximo projeto'}
-      onClick={onClick}
-      className={`absolute inset-y-0 ${isLeft ? 'left-0' : 'right-0'} z-10 w-[clamp(48px,12.9vw,248px)] flex items-center ${
-        isLeft ? 'justify-start pl-4 md:pl-12 bg-gradient-to-r' : 'justify-end pr-4 md:pr-12 bg-gradient-to-l'
-      } from-black/60 to-transparent`}
-    >
-      <svg
-        viewBox="0 0 56 35"
-        className={`h-4 w-7 md:h-6 md:w-12 ${isLeft ? 'rotate-90' : '-rotate-90'}`}
-        fill="none"
-      >
-        <path
-          d="M28,34.82,0,0,28,34.82,56,0"
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="6"
-        />
-      </svg>
-    </button>
-  )
-}
-
 const AUTO_SCROLL_SPEED = 1 // px per frame — slow, ambient drift
+// Rendered twice back-to-back so the loop can wrap seamlessly: once the
+// track scrolls past one full set, we subtract that set's width and land
+// on the pixel-identical spot in the second copy — no visible jump, no
+// reversing direction (unlike the old ping-pong behavior).
+const TRACK_ITEMS = [...projects, ...projects]
 
 export default function Portfolio() {
   const trackRef = useRef(null)
   const cardRefs = useRef([])
   const isPausedRef = useRef(false)
-  const directionRef = useRef(1)
   const [openIndex, setOpenIndex] = useState(null)
 
   const cards = () => cardRefs.current.filter(Boolean)
@@ -68,15 +44,11 @@ export default function Portfolio() {
         // stay in sync with any manual scroll that happened while paused
         position = track.scrollLeft
       } else {
-        const max = track.scrollWidth - track.clientWidth
-        if (max > 0) {
-          position += AUTO_SCROLL_SPEED * directionRef.current
-          if (position >= max) {
-            position = max
-            directionRef.current = -1
-          } else if (position <= 0) {
-            position = 0
-            directionRef.current = 1
+        const singleSetWidth = track.scrollWidth / 2
+        if (singleSetWidth > 0) {
+          position += AUTO_SCROLL_SPEED
+          if (position >= singleSetWidth) {
+            position -= singleSetWidth
           }
           track.scrollLeft = position
         }
@@ -88,7 +60,7 @@ export default function Portfolio() {
   }, [])
 
   const scrollToIndex = (i) => {
-    const target = (i + projects.length) % projects.length
+    const target = (i + TRACK_ITEMS.length) % TRACK_ITEMS.length
     cardRefs.current[target]?.scrollIntoView({
       behavior: 'smooth',
       inline: 'center',
@@ -96,15 +68,10 @@ export default function Portfolio() {
     })
   }
 
-  const handleArrow = (delta) => {
-    const centered = getCenteredIndex(trackRef.current, cards())
-    scrollToIndex(centered + delta)
-  }
-
   const handleCardClick = (i) => {
     const centered = getCenteredIndex(trackRef.current, cards())
     if (centered === i) {
-      setOpenIndex(i)
+      setOpenIndex(i % projects.length)
     } else {
       scrollToIndex(i)
     }
@@ -131,9 +98,9 @@ export default function Portfolio() {
             ref={trackRef}
             className="no-scrollbar flex overflow-x-auto gap-[clamp(16px,5.47vw,105px)] px-[calc(50%-clamp(110px,18.6vw,357px))]"
           >
-            {projects.map((project, i) => (
+            {TRACK_ITEMS.map((project, i) => (
               <button
-                key={project.id}
+                key={`${project.id}-${i}`}
                 ref={(el) => (cardRefs.current[i] = el)}
                 type="button"
                 onClick={() => handleCardClick(i)}
@@ -166,17 +133,12 @@ export default function Portfolio() {
               </button>
             ))}
           </div>
-
-          <Arrow direction="left" onClick={() => handleArrow(-1)} />
-          <Arrow direction="right" onClick={() => handleArrow(1)} />
         </div>
       </div>
 
       <PortfolioModal
         project={openIndex !== null ? projects[openIndex] : null}
         onClose={() => setOpenIndex(null)}
-        onPrev={() => setOpenIndex((i) => (i - 1 + projects.length) % projects.length)}
-        onNext={() => setOpenIndex((i) => (i + 1) % projects.length)}
       />
     </section>
   )
