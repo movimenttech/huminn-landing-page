@@ -50,6 +50,11 @@ export default function ContactForm() {
         body: new URLSearchParams(form),
       })
       setStatus('sent')
+
+      // Disparo de conversão — Google Ads + Meta Pixel (via GTM)
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: 'envio_formulario' })
+
       setForm({ nome: '', email: '', telefone: '', empresa: '', mensagem: '' })
     } catch {
       setStatus('error')

@@ -41,6 +41,10 @@ export default function Header() {
           href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            window.dataLayer = window.dataLayer || []
+            window.dataLayer.push({ event: 'clique_whatsapp' })
+          }}
           aria-label="Fale conosco pelo WhatsApp"
           className="shrink-0 flex items-center justify-center h-[clamp(40px,2.92vw,56px)] w-[clamp(40px,2.92vw,56px)] rounded-full bg-white/10 ring-1 ring-white/15 hover:bg-huminn-purple hover:ring-huminn-purple transition-colors"
         >

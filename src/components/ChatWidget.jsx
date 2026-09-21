@@ -125,6 +125,10 @@ export default function ChatWidget() {
         mode: 'no-cors',
         body: new URLSearchParams(answersRef.current),
       })
+
+      // Disparo de conversão — Google Ads + Meta Pixel (via GTM)
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: 'envio_chat' })
     } catch {
       // silencioso: no-cors não deixa ler o resultado mesmo
     }
