@@ -1,62 +1,31 @@
-# HUMINN — Landing Page
+# HUMINN — site institucional e landing page de embalagens
 
-Site institucional da HUMINN. React + Vite + Tailwind CSS + Framer Motion.
+Repositório com o site institucional (React/Vite) e uma landing page standalone para a oferta de design estratégico de embalagens.
 
-## Rodar localmente
+## Pastas principais
+- `src/` e `public/`: site institucional React + Vite.
+- `landing-embalagens/`: versão original da LP, preservada como referência/backup.
+- `landing-embalagens-v2/`: versão de trabalho otimizada, ainda não publicada.
+- `docs/`: contexto, estratégia, análise de mídia, rastreamento, plano de otimização e QA.
+- `CLAUDE.md`: regras e contexto operacional para Claude Code.
 
+## Rodar o site institucional
 ```bash
 npm install
 npm run dev
-```
-
-Abre em `http://localhost:5173`.
-
-## Gerar o build de produção
-
-```bash
 npm run build
-```
+npm run lint
+``
 
-Isso gera a pasta `dist/` — é só o conteúdo dessa pasta que precisa ir pro
-seu domínio (não suba `src/`, `node_modules/`, `recursos/` nem
-`WIREFRAME COMPLETO/`, são só material de desenvolvimento).
+## Visualizar a landing page
+A LP é HTML/CSS/JS puro. Sirva a raiz do repositório com um servidor estático e abra:
+- Original: `/landing-embalagens/index.html`
+- V2: `/landing-embalagens-v2/index.html`
 
-Para conferir o resultado antes de subir:
+A V2 reutiliza os arquivos de imagem de `landing-embalagens/assets/` por caminho relativo, evitando duplicação de binários.
 
-```bash
-npm run preview
-```
-
-## Subir pro domínio
-
-Como é um site 100% estático (sem back-end próprio — o formulário de
-contato usa um iframe do CRM Alphaville, e as imagens são todas locais),
-qualquer hospedagem estática serve. Alguns caminhos comuns:
-
-- **Hospedagem compartilhada (cPanel, Hostinger, etc.):** suba todo o
-  conteúdo de dentro de `dist/` (o `index.html` e a pasta `assets/`) direto
-  na raiz do domínio via FTP/gerenciador de arquivos.
-- **Vercel / Netlify:** conectar o repositório e configurar
-  *build command* `npm run build` e *publish/output directory* `dist`.
-
-O site assume que vai ficar na **raiz** do domínio (`https://seudominio.com.br/`).
-Se for publicar dentro de uma subpasta (`https://seudominio.com.br/site/`),
-avise que precisa ajustar o `base` no `vite.config.js` antes de gerar o
-build, senão as imagens e o CSS não carregam.
-
-## Estrutura
-
-- `src/components/` — uma seção do site por arquivo (Header, Hero, About,
-  Services, Portfolio, Brands, ContactForm, SocialSection, Footer).
-- `src/data/` — conteúdo dos projetos do portfólio e das marcas parceiras.
-- `public/images/` — todas as imagens usadas no site (já otimizadas em WebP).
-- `recursos/` e `WIREFRAME COMPLETO/` — material de referência do design
-  original, não faz parte do site publicado.
-
-## Pendências conhecidas
-
-- A legenda branca embaixo do nome de cada projeto em "Nossos Trabalhos"
-  ainda é o placeholder "Breve descrição do projeto" — nunca foi pedido pra
-  trocar por um texto real ali.
-- Os links de Instagram, LinkedIn e Facebook (rodapé e seção "Quer
-  acompanhar de perto?") já apontam pros perfis reais da HUMINN.
+## Git / segurança
+- Branch de preparação: `preparacao-claude-code`.
+- A `master` não deve ser alterada neste trabalho.
+- A V2 não está autorizada para deploy ou substituição da página ativa. Comparar, validar e obter aprovação antes de qualquer publicação.
+- Consulte `CLAUDE.md` antes de editar.
